@@ -107,7 +107,14 @@ def go(args):
     # type, provide a description and add rf_config as metadata. Then, use the .add_dir method of the artifact instance
     # you just created to add the "random_forest_dir" directory to the artifact, and finally use
     # run.log_artifact to log the artifact to the run
-    # YOUR CODE HERE
+    inference_pipeline_artifact = wandb.Artifact(
+        name=args.output_artifact,
+        type="model_export",
+        description="Random Forest inference pipeline artifact",
+        metadata=rf_config
+    )
+    inference_pipeline_artifact.add_dir("random_forest_dir")
+    run.log_artifact(inference_pipeline_artifact)
     ######################################
 
     # Plot feature importance
