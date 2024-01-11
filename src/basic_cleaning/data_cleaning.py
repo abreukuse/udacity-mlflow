@@ -31,6 +31,9 @@ def preprocessing(data, args):
     data = data.query(f"{min_price} <= price <= {max_price}").copy()
     data["last_review"] = pd.to_datetime(data['last_review'])
 
+    data = data.loc[((data['longitude'] >= -74.25) & (data['longitude'] <= -73.50)) &
+                    ((data['latitude'] >= 40.5) & (data['latitude'] <= 41.2))]
+
     return data
 
 
